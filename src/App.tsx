@@ -9,7 +9,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/clearup-website/">
       <QuoteModalProvider>
         <div className="min-h-screen bg-white text-slate-800 flex flex-col">
           <Navbar />

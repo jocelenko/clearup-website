@@ -1,14 +1,14 @@
 import React from 'react';
-import { Droplets, Phone } from 'lucide-react';
+import { Droplets, Phone, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useQuoteModal } from '../context/QuoteModalContext';
+import { CONTACT } from '../config/contact';
 
 // Footer links are bare text; min-h-11 lifts them to the 44px tap-target minimum.
 const linkClass =
   'text-left inline-flex items-center min-h-11 min-w-11 hover:text-leaf-400 transition-colors';
 
-const PHONE_DISPLAY = '1300 123 456';
-const PHONE_TEL = '1300123456';
+
 
 export default function Footer() {
   const { openQuote } = useQuoteModal();
@@ -81,11 +81,19 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="text-white font-semibold mb-4">Stay in Touch</h4>
+            <p className="text-sm text-white mb-0.5">{CONTACT.name}</p>
+            <p className="text-sm text-slate-400 mb-2">{CONTACT.role}</p>
             <ul className="text-sm">
               <li>
-                <a href={`tel:${PHONE_TEL}`} className={`${linkClass} gap-2`}>
+                <a href={`tel:${CONTACT.phoneTel}`} className={`${linkClass} gap-2`}>
                   <Phone className="w-4 h-4 flex-shrink-0" />
-                  {PHONE_DISPLAY}
+                  {CONTACT.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${CONTACT.email}`} className={`${linkClass} gap-2 break-all`}>
+                  <Mail className="w-4 h-4 flex-shrink-0" />
+                  {CONTACT.email}
                 </a>
               </li>
               <li>

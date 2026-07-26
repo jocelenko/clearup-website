@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { X, ArrowLeft, CheckCircle2, Loader2 } from 'lucide-react';
 import { useQuoteModal, type QuoteService } from '../context/QuoteModalContext';
 import { useModalA11y } from '../hooks/useModalA11y';
+import { CONTACT } from '../config/contact';
 
 const FORM_ENDPOINT = 'https://formsubmit.co/ajax/admin@clear-up.com.au';
 
@@ -234,7 +235,7 @@ export default function QuoteModal() {
       clearDraft();
     } catch (err: any) {
       setStatus('error');
-      setErrorMsg(err?.message || 'Something went wrong. Please call us on 1300 123 456.');
+      setErrorMsg(err?.message || `Something went wrong. Please call us on ${CONTACT.phoneDisplay}.`);
     }
   };
 

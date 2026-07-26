@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Phone } from 'lucide-react';
 import { useQuoteModal } from '../context/QuoteModalContext';
+import { CONTACT } from '../config/contact';
 
 export default function Hero() {
   const { openQuote } = useQuoteModal();
@@ -44,11 +45,11 @@ export default function Hero() {
               <ArrowRight className="w-5 h-5" />
             </button>
             <a
-              href="tel:1300123456"
+              href={`tel:${CONTACT.phoneTel}`}
               className="inline-flex justify-center items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/25 px-8 py-4 rounded-full font-medium transition-colors backdrop-blur-sm"
             >
               <Phone className="w-4 h-4" />
-              1300 123 456
+              {CONTACT.phoneDisplay}
             </a>
           </div>
         </motion.div>

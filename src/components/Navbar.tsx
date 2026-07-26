@@ -3,9 +3,9 @@ import { Menu, X, Phone, Droplets } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
 import { useQuoteModal } from '../context/QuoteModalContext';
+import { CONTACT } from '../config/contact';
 
-const PHONE_DISPLAY = '1300 123 456';
-const PHONE_TEL = '1300123456';
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -46,11 +46,11 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
             <a
-              href={`tel:${PHONE_TEL}`}
+              href={`tel:${CONTACT.phoneTel}`}
               className="flex items-center gap-2 py-2.5 text-slate-700 hover:text-primary-600 font-medium transition-colors"
             >
               <Phone className="w-4 h-4 text-primary-600" />
-              <span>{PHONE_DISPLAY}</span>
+              <span>{CONTACT.phoneDisplay}</span>
             </a>
             <button
               onClick={handleQuote}
@@ -63,7 +63,7 @@ export default function Navbar() {
           <div className="flex items-center md:hidden">
             {/* Both sit at the 44px tap-target minimum, with a visible focus ring. */}
             <a
-              href={`tel:${PHONE_TEL}`}
+              href={`tel:${CONTACT.phoneTel}`}
               className="flex items-center justify-center w-11 h-11 text-slate-700 hover:text-primary-600 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
               aria-label="Call us"
             >
@@ -91,11 +91,11 @@ export default function Navbar() {
           >
             <div className="px-4 py-4 space-y-2">
               <a
-                href={`tel:${PHONE_TEL}`}
+                href={`tel:${CONTACT.phoneTel}`}
                 className="flex items-center gap-2 px-3 py-3 text-slate-700 font-medium rounded-lg hover:bg-slate-50"
               >
                 <Phone className="w-4 h-4 text-primary-600" />
-                {PHONE_DISPLAY}
+                {CONTACT.phoneDisplay}
               </a>
               <button
                 onClick={handleQuote}

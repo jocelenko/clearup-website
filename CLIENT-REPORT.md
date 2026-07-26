@@ -110,13 +110,19 @@ For a business whose product is visible cleanliness, the absence of a single pho
 
 ---
 
-## 6. Still outstanding
+## 6. Contact details now on the site
+
+Sonia Alano, Business Development, is now listed in the footer with the mobile number and email address. The placeholder phone number has been removed from every part of the site. The homepage previously had no email address anywhere, so anyone wanting to send through a floor plan or ask a quick question had no way to do it without opening the quote form.
+
+Quote form submissions still go to the general admin@clear-up.com.au inbox rather than Sonia's direct address. Say the word if they should go to her instead.
+
+---
+
+## 7. Still outstanding
 
 | Item | Needed from |
 |---|---|
 | **Confirm quote requests are arriving.** The form sends through a service called FormSubmit, which only delivers once the receiving address has been activated by clicking a one-time confirmation link. If that was never done, quote requests would be sent but never arrive, with no error shown to the sender. Worth confirming whether any have ever come through to admin@clear-up.com.au | Sonia |
-| Real phone number, currently a placeholder | Sonia |
-| A contact email address on the page, currently only inside the quote form | Sonia |
 | Business address and ABN | Sonia |
 | Management Systems wording | Sonia, then rewrite |
 | Proof material as listed above | Sonia |
@@ -124,7 +130,7 @@ For a business whose product is visible cleanliness, the absence of a single pho
 
 ---
 
-## 7. Versions
+## 8. Versions
 
 Every stage is saved and any of them can be restored:
 

@@ -74,9 +74,7 @@ export default function InHouseApp() {
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 mb-3 border border-white/20">
                   <p className="text-xs text-white/70 mb-1">Active job</p>
-                  {/* Generic label: naming a real centre here implies a client
-                      relationship that has not been confirmed. */}
-                  <p className="font-semibold text-sm">Southport site</p>
+                  <p className="font-semibold text-sm">Westfield Coomera</p>
                   <p className="text-xs text-white/70 mt-1">Started 06:42</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">

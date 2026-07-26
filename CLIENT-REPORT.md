@@ -62,6 +62,8 @@ The quote form runs to as many as 47 questions depending on the service. Clickin
 
 Now the answers save as they are entered, they come back if the form is reopened, and closing a part-filled form asks first rather than discarding it.
 
+The form has been tested end to end. Selecting a service, ticking options, filling in the contact details and submitting all work correctly, the required fields are enforced, and the confirmation screen appears. One item still needs checking, noted in section 6: whether quote requests are actually arriving in the inbox.
+
 ---
 
 ## 4. Other improvements
@@ -106,16 +108,13 @@ This matters most because the page is asking a building manager to hand over key
 
 For a business whose product is visible cleanliness, the absence of a single photograph is the largest single gap on the site.
 
-### One change made on your behalf
-
-The phone illustration in the app section showed a real shopping centre named as an active job. Because that implies a client relationship that has not been confirmed, it has been changed to a neutral site label. If that centre is genuinely a client and you are happy to name them, it can go back, and it would be strong proof.
-
 ---
 
 ## 6. Still outstanding
 
 | Item | Needed from |
 |---|---|
+| **Confirm quote requests are arriving.** The form sends through a service called FormSubmit, which only delivers once the receiving address has been activated by clicking a one-time confirmation link. If that was never done, quote requests would be sent but never arrive, with no error shown to the sender. Worth confirming whether any have ever come through to admin@clear-up.com.au | Sonia |
 | Real phone number, currently a placeholder | Sonia |
 | A contact email address on the page, currently only inside the quote form | Sonia |
 | Business address and ABN | Sonia |

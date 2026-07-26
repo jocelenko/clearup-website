@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom';
 import { useQuoteModal } from '../context/QuoteModalContext';
 import { CONTACT } from '../config/contact';
 
-// Footer links are bare text; min-h-11 lifts them to the 44px tap-target minimum.
+/*
+  Every row in every footer column uses this height, so the columns share one
+  baseline grid. Links add hover on top. Without it the plain Service
+  Locations items sat on a tighter rhythm than the link columns beside them.
+*/
+const rowClass = 'flex items-center min-h-11 leading-tight';
 const linkClass =
-  'text-left inline-flex items-center min-h-11 min-w-11 hover:text-leaf-400 transition-colors';
+  'text-left inline-flex items-center min-h-11 min-w-11 leading-tight hover:text-leaf-400 transition-colors';
 
 
 
@@ -71,18 +76,21 @@ export default function Footer() {
           {/* Locations */}
           <div>
             <h4 className="text-white font-semibold mb-4">Service Locations</h4>
-            <ul className="space-y-2 text-sm">
-              <li>Brisbane</li>
-              <li>Gold Coast</li>
-              <li>Sunshine Coast</li>
+            <ul className="text-sm">
+              <li className={rowClass}>Brisbane</li>
+              <li className={rowClass}>Gold Coast</li>
+              <li className={rowClass}>Sunshine Coast</li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
             <h4 className="text-white font-semibold mb-4">Stay in Touch</h4>
-            <p className="text-sm text-white mb-0.5">{CONTACT.name}</p>
-            <p className="text-sm text-slate-400 mb-2">{CONTACT.role}</p>
+            {/* Sits on the same 44px row rhythm as the other columns' first item */}
+            <div className="flex flex-col justify-center min-h-11 text-sm leading-tight">
+              <p className="text-white">{CONTACT.name}</p>
+              <p className="text-slate-400">{CONTACT.role}</p>
+            </div>
             <ul className="text-sm">
               <li>
                 <a href={`tel:${CONTACT.phoneTel}`} className={`${linkClass} gap-2`}>

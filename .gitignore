@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Impeccable critique snapshots (local review artefacts)
+.impeccable/

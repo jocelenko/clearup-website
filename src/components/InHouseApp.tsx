@@ -10,7 +10,7 @@ const features = [
 
 export default function InHouseApp() {
   return (
-    <section id="app" className="py-20 lg:py-28 bg-gradient-to-br from-primary-900 via-primary-800 to-slate-900 text-white overflow-hidden">
+    <section id="app" className="py-14 lg:py-16 bg-gradient-to-br from-primary-900 via-primary-800 to-slate-900 text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
@@ -24,9 +24,9 @@ export default function InHouseApp() {
               Technology
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold mb-6 leading-tight">
-              Built to Serve Better — Our In-House App
+              Built to Serve Better: Our In-House App
             </h2>
-            <p className="text-white/80 text-lg leading-relaxed mb-8">
+            <p className="text-primary-200 text-lg leading-relaxed mb-8">
               We created a robust in-house app to streamline operations, track service delivery and support clear communication. With reporting accessible at any time, we can serve our clients with greater reliability, transparency and care.
             </p>
             <div className="space-y-4">
@@ -58,7 +58,7 @@ export default function InHouseApp() {
             transition={{ duration: 0.6 }}
             className="relative flex justify-center"
           >
-            <div className="relative w-64 h-[520px] rounded-[3rem] bg-slate-900 border-[10px] border-slate-800 shadow-2xl overflow-hidden">
+            <div className="relative w-52 h-[420px] sm:w-64 sm:h-[520px] rounded-[2.5rem] sm:rounded-[3rem] bg-slate-900 border-8 sm:border-[10px] border-slate-800 shadow-2xl overflow-hidden">
               <div className="absolute top-0 inset-x-0 h-6 bg-slate-900 flex justify-center">
                 <div className="w-24 h-5 bg-black rounded-b-2xl"></div>
               </div>

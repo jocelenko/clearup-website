@@ -21,13 +21,13 @@ export default function Navbar() {
   return (
     <nav className="fixed w-full bg-white/95 backdrop-blur-md z-40 border-b border-slate-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 gap-4">
+        <div className="flex justify-between items-center h-24 gap-4">
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
               <img
-                src="/logo.png"
+                src={`${import.meta.env.BASE_URL}logo.png`}
                 alt="Clear Up Logo"
-                className="h-10 sm:h-12 w-auto max-w-[200px] sm:max-w-[240px] mix-blend-multiply object-contain"
+                className="h-14 sm:h-16 w-auto max-w-[240px] sm:max-w-[300px] mix-blend-multiply object-contain"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   document.getElementById('fallback-logo')?.classList.remove('hidden');
@@ -47,7 +47,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
             <a
               href={`tel:${PHONE_TEL}`}
-              className="flex items-center gap-2 text-slate-700 hover:text-primary-600 font-medium transition-colors"
+              className="flex items-center gap-2 py-2.5 text-slate-700 hover:text-primary-600 font-medium transition-colors"
             >
               <Phone className="w-4 h-4 text-primary-600" />
               <span>{PHONE_DISPLAY}</span>
@@ -61,17 +61,19 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center md:hidden">
+            {/* Both sit at the 44px tap-target minimum, with a visible focus ring. */}
             <a
               href={`tel:${PHONE_TEL}`}
-              className="mr-2 text-slate-700 hover:text-primary-600 p-2"
+              className="flex items-center justify-center w-11 h-11 text-slate-700 hover:text-primary-600 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
               aria-label="Call us"
             >
               <Phone className="w-5 h-5" />
             </a>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-700 hover:text-primary-600 focus:outline-none p-2"
+              className="flex items-center justify-center w-11 h-11 text-slate-700 hover:text-primary-600 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

@@ -6,7 +6,7 @@ const systems = [
   {
     title: 'Work Health & Safety Management System',
     icon: ShieldCheck,
-    body: 'We are developing strong health and safety processes to protect our cleaners, clients and the public — through risk assessments, training, PPE and safe work procedures.',
+    body: 'We are developing strong health and safety processes to protect our cleaners, clients and the public, through risk assessments, training, PPE and safe work procedures.',
   },
   {
     title: 'Quality Management System',
@@ -21,20 +21,20 @@ const systems = [
   {
     title: 'Environmental Management System',
     icon: Leaf,
-    body: 'Our environmental system supports responsible cleaning practices — including safe chemical management, waste reduction and environmentally conscious operations.',
+    body: 'Our environmental system supports responsible cleaning practices, including safe chemical management, waste reduction and environmentally conscious operations.',
   },
 ];
 
 export default function ManagementSystems() {
   return (
-    <section id="systems" className="py-20 lg:py-28 bg-slate-50">
+    <section id="systems" className="py-14 lg:py-16 bg-gradient-to-br from-leaf-900 via-leaf-800 to-leaf-950 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold text-primary-900 mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold text-white mb-4">
             Management Systems
           </h2>
-          <p className="text-slate-600 text-lg">
-            Clear Up is certified in Safety, Quality and Environmental Management. These certifications represent our professional standing in the cleaning industry, and our ability to provide quality, safe, and structured services.
+          <p className="text-leaf-200 text-lg">
+            These represent our professional standing in the cleaning industry, and our ability to provide quality, safe and structured services.
           </p>
         </div>
 

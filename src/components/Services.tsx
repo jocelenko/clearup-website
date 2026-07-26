@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Building2, Truck, X, ArrowRight } from 'lucide-react';
+import { Building2, BrushCleaning, X, ArrowRight } from 'lucide-react';
 import { useQuoteModal } from '../context/QuoteModalContext';
 import type { QuoteService } from '../context/QuoteModalContext';
 
@@ -68,7 +68,7 @@ const services: ServiceDef[] = [
     key: 'periodical',
     title: 'Periodical Cleaning',
     short: 'Specialised periodical work, from carpet care to high-pressure hard surface cleaning.',
-    icon: <Truck className="w-7 h-7" />,
+    icon: <BrushCleaning className="w-7 h-7" />,
     details: (
       <ul className="space-y-3 list-disc pl-5">
         <li>

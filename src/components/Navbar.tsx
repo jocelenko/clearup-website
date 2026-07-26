@@ -47,7 +47,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
             <a
               href={`tel:${PHONE_TEL}`}
-              className="flex items-center gap-2 text-slate-700 hover:text-primary-600 font-medium transition-colors"
+              className="flex items-center gap-2 py-2.5 text-slate-700 hover:text-primary-600 font-medium transition-colors"
             >
               <Phone className="w-4 h-4 text-primary-600" />
               <span>{PHONE_DISPLAY}</span>
@@ -61,17 +61,19 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center md:hidden">
+            {/* Both sit at the 44px tap-target minimum, with a visible focus ring. */}
             <a
               href={`tel:${PHONE_TEL}`}
-              className="mr-2 text-slate-700 hover:text-primary-600 p-2"
+              className="flex items-center justify-center w-11 h-11 text-slate-700 hover:text-primary-600 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
               aria-label="Call us"
             >
               <Phone className="w-5 h-5" />
             </a>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-700 hover:text-primary-600 focus:outline-none p-2"
+              className="flex items-center justify-center w-11 h-11 text-slate-700 hover:text-primary-600 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

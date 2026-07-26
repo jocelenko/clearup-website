@@ -24,7 +24,7 @@ export default function InHouseApp() {
               Technology
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold mb-6 leading-tight">
-              Built to Serve Better — Our In-House App
+              Built to Serve Better: Our In-House App
             </h2>
             <p className="text-primary-200 text-lg leading-relaxed mb-8">
               We created a robust in-house app to streamline operations, track service delivery and support clear communication. With reporting accessible at any time, we can serve our clients with greater reliability, transparency and care.
@@ -58,7 +58,7 @@ export default function InHouseApp() {
             transition={{ duration: 0.6 }}
             className="relative flex justify-center"
           >
-            <div className="relative w-64 h-[520px] rounded-[3rem] bg-slate-900 border-[10px] border-slate-800 shadow-2xl overflow-hidden">
+            <div className="relative w-52 h-[420px] sm:w-64 sm:h-[520px] rounded-[2.5rem] sm:rounded-[3rem] bg-slate-900 border-8 sm:border-[10px] border-slate-800 shadow-2xl overflow-hidden">
               <div className="absolute top-0 inset-x-0 h-6 bg-slate-900 flex justify-center">
                 <div className="w-24 h-5 bg-black rounded-b-2xl"></div>
               </div>
@@ -74,7 +74,9 @@ export default function InHouseApp() {
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 mb-3 border border-white/20">
                   <p className="text-xs text-white/70 mb-1">Active job</p>
-                  <p className="font-semibold text-sm">Westfield Coomera</p>
+                  {/* Generic label: naming a real centre here implies a client
+                      relationship that has not been confirmed. */}
+                  <p className="font-semibold text-sm">Southport site</p>
                   <p className="text-xs text-white/70 mt-1">Started 06:42</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">

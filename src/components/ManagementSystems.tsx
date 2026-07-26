@@ -6,7 +6,7 @@ const systems = [
   {
     title: 'Work Health & Safety Management System',
     icon: ShieldCheck,
-    body: 'We are developing strong health and safety processes to protect our cleaners, clients and the public — through risk assessments, training, PPE and safe work procedures.',
+    body: 'We are developing strong health and safety processes to protect our cleaners, clients and the public, through risk assessments, training, PPE and safe work procedures.',
   },
   {
     title: 'Quality Management System',
@@ -21,7 +21,7 @@ const systems = [
   {
     title: 'Environmental Management System',
     icon: Leaf,
-    body: 'Our environmental system supports responsible cleaning practices — including safe chemical management, waste reduction and environmentally conscious operations.',
+    body: 'Our environmental system supports responsible cleaning practices, including safe chemical management, waste reduction and environmentally conscious operations.',
   },
 ];
 

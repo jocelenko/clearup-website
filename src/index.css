@@ -68,6 +68,33 @@ h1, h2, h3, h4, h5, h6 {
   animation: var(--animate-marquee);
 }
 
-.animate-marquee:hover {
+.animate-marquee:hover,
+.animate-marquee:focus-within {
   animation-play-state: paused;
+}
+
+/* Touch has no hover, so the marquee can never be paused there. Slow it down
+   instead of running it at desktop speed on a screen showing ~1.5 cards. */
+@media (max-width: 640px) {
+  .animate-marquee {
+    animation-duration: 70s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

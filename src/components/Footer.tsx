@@ -3,6 +3,10 @@ import { Droplets, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useQuoteModal } from '../context/QuoteModalContext';
 
+// Footer links are bare text; min-h-11 lifts them to the 44px tap-target minimum.
+const linkClass =
+  'text-left inline-flex items-center min-h-11 min-w-11 hover:text-leaf-400 transition-colors';
+
 const PHONE_DISPLAY = '1300 123 456';
 const PHONE_TEL = '1300123456';
 
@@ -20,9 +24,9 @@ export default function Footer() {
           Six-column grid: the logo takes two, then the four menus take one
           each, so the gap between every menu column is identical.
         */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-6 gap-x-6 gap-y-8 mb-8">
           {/* Logo */}
-          <div className="lg:col-span-2">
+          <div className="col-span-2">
             <Link to="/" className="inline-flex items-center gap-2">
               <img
                 src={`${import.meta.env.BASE_URL}logo%20overlay.png`}
@@ -47,20 +51,20 @@ export default function Footer() {
           {/* Company */}
           <div>
             <h4 className="text-white font-semibold mb-4">Company</h4>
-            <ul className="space-y-2 text-sm">
-              <li><button onClick={() => scrollTo('values')} className="text-left hover:text-leaf-400 transition-colors">Our Values</button></li>
-              <li><button onClick={() => scrollTo('values')} className="text-left hover:text-leaf-400 transition-colors">Our Culture</button></li>
-              <li><button onClick={() => scrollTo('values')} className="text-left hover:text-leaf-400 transition-colors">Vision</button></li>
+            <ul className="text-sm">
+              <li><button onClick={() => scrollTo('our-values')} className={linkClass}>Our Values</button></li>
+              <li><button onClick={() => scrollTo('our-culture')} className={linkClass}>Our Culture</button></li>
+              <li><button onClick={() => scrollTo('vision')} className={linkClass}>Vision</button></li>
             </ul>
           </div>
 
           {/* Services */}
           <div>
             <h4 className="text-white font-semibold mb-4">Our Services</h4>
-            <ul className="space-y-2 text-sm">
-              <li><button onClick={() => scrollTo('services')} className="text-left hover:text-leaf-400 transition-colors">Window Cleaning</button></li>
-              <li><button onClick={() => scrollTo('services')} className="text-left hover:text-leaf-400 transition-colors">Retail &amp; Commercial Cleaning</button></li>
-              <li><button onClick={() => scrollTo('services')} className="text-left hover:text-leaf-400 transition-colors">Periodical Cleaning</button></li>
+            <ul className="text-sm">
+              <li><button onClick={() => scrollTo('service-window')} className={linkClass}>Window Cleaning</button></li>
+              <li><button onClick={() => scrollTo('service-retail')} className={linkClass}>Retail &amp; Commercial Cleaning</button></li>
+              <li><button onClick={() => scrollTo('service-periodical')} className={linkClass}>Periodical Cleaning</button></li>
             </ul>
           </div>
 
@@ -77,15 +81,15 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="text-white font-semibold mb-4">Stay in Touch</h4>
-            <ul className="space-y-2 text-sm">
+            <ul className="text-sm">
               <li>
-                <a href={`tel:${PHONE_TEL}`} className="inline-flex items-center gap-2 hover:text-leaf-400 transition-colors">
-                  <Phone className="w-4 h-4" />
+                <a href={`tel:${PHONE_TEL}`} className={`${linkClass} gap-2`}>
+                  <Phone className="w-4 h-4 flex-shrink-0" />
                   {PHONE_DISPLAY}
                 </a>
               </li>
               <li>
-                <button onClick={() => openQuote()} className="text-left hover:text-leaf-400 transition-colors">
+                <button onClick={() => openQuote()} className={linkClass}>
                   Request a Quote
                 </button>
               </li>
@@ -97,9 +101,10 @@ export default function Footer() {
           <p className="text-sm text-slate-400 italic max-w-3xl mb-6">
             Clear Up acknowledges the Traditional Custodians of the land and pays respect to Elders past and present, their culture and history.
           </p>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-slate-500">
+          {/* slate-500 on slate-900 is 3.75:1 and fails AA; slate-400 is 6.96:1. */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-1 text-sm text-slate-400">
             <p>&copy; {new Date().getFullYear()} Clear Up Pty Ltd. All rights reserved.</p>
-            <Link to="/privacy-policy" className="hover:text-white transition-colors">
+            <Link to="/privacy-policy" className="inline-flex items-center min-h-11 hover:text-white transition-colors">
               Privacy Policy
             </Link>
           </div>

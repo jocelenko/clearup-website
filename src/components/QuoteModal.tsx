@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { motion } from 'motion/react';
 import { X, ArrowLeft, CheckCircle2, Loader2 } from 'lucide-react';
 import { useQuoteModal, type QuoteService } from '../context/QuoteModalContext';
+import { useModalA11y } from '../hooks/useModalA11y';
 
 const FORM_ENDPOINT = 'https://formsubmit.co/ajax/admin@clear-up.com.au';
 
@@ -78,29 +79,107 @@ const emptyForm: FormState = {
   others: {},
 };
 
+const DRAFT_KEY = 'clearup:quote-draft';
+
+/** True once the visitor has typed or ticked anything worth protecting. */
+function isDirty(form: FormState): boolean {
+  return (
+    form.callBack ||
+    form.callBackPhone.trim() !== '' ||
+    form.photos !== '' ||
+    form.notes.trim() !== '' ||
+    form.name.trim() !== '' ||
+    form.business.trim() !== '' ||
+    form.email.trim() !== '' ||
+    form.phone.trim() !== '' ||
+    form.address.trim() !== '' ||
+    Object.values(form.groups).some((v) => v.length > 0) ||
+    Object.values(form.others).some((v) => v.trim() !== '')
+  );
+}
+
 export default function QuoteModal() {
   const { isOpen, preselected, closeQuote } = useQuoteModal();
   const [service, setService] = useState<QuoteService>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [confirmDiscard, setConfirmDiscard] = useState(false);
 
+  const dirty = isDirty(form);
+
+  /*
+    A misclick on the backdrop used to wipe a form that can run to 47
+    checkboxes. Answers are now restored from a saved draft on open, and any
+    dismissal while the form has content asks first.
+  */
   useEffect(() => {
-    if (isOpen) {
+    if (!isOpen) return;
+    setStatus('idle');
+    setErrorMsg('');
+    setConfirmDiscard(false);
+
+    let restored = false;
+    try {
+      const raw = sessionStorage.getItem(DRAFT_KEY);
+      if (raw) {
+        const draft = JSON.parse(raw) as { service: QuoteService; form: FormState };
+        if (draft?.form) {
+          setService(preselected ?? draft.service ?? null);
+          setForm({ ...emptyForm, ...draft.form });
+          restored = true;
+        }
+      }
+    } catch {
+      // Corrupt or unavailable storage just means no draft.
+    }
+
+    if (!restored) {
       setService(preselected ?? null);
       setForm(emptyForm);
-      setStatus('idle');
-      setErrorMsg('');
     }
   }, [isOpen, preselected]);
 
+  // Save on every change so an accidental dismissal loses nothing.
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) closeQuote();
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [isOpen, closeQuote]);
+    if (!isOpen) return;
+    try {
+      if (dirty) sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ service, form }));
+      else sessionStorage.removeItem(DRAFT_KEY);
+    } catch {
+      // Storage full or blocked; the form still works, it just will not persist.
+    }
+  }, [isOpen, dirty, service, form]);
+
+  const clearDraft = useCallback(() => {
+    try {
+      sessionStorage.removeItem(DRAFT_KEY);
+    } catch {
+      /* nothing to do */
+    }
+  }, []);
+
+  const requestClose = useCallback(() => {
+    if (dirty && status !== 'success') {
+      setConfirmDiscard(true);
+      return;
+    }
+    clearDraft();
+    closeQuote();
+  }, [dirty, status, clearDraft, closeQuote]);
+
+  const discardAndClose = useCallback(() => {
+    clearDraft();
+    setForm(emptyForm);
+    setConfirmDiscard(false);
+    closeQuote();
+  }, [clearDraft, closeQuote]);
+
+  const panelRef = useModalA11y({
+    isOpen,
+    onClose: requestClose,
+    canClose: () => !confirmDiscard,
+  });
 
   const groups = useMemo(() => (service ? groupsByService[service] : []), [service]);
 
@@ -123,12 +202,12 @@ export default function QuoteModal() {
     setErrorMsg('');
 
     const payload: Record<string, string> = {
-      _subject: `New Quote Request — ${serviceLabels[service]}`,
+      _subject: `New Quote Request: ${serviceLabels[service]}`,
       _template: 'table',
       'Service Requested': serviceLabels[service],
       'Call me back': form.callBack ? 'Yes' : 'No',
       ...(form.callBack && form.callBackPhone ? { 'Call-back phone': form.callBackPhone } : {}),
-      'Would you like to upload photos?': form.photos || '—',
+      'Would you like to upload photos?': form.photos || 'Not specified',
       'Additional Notes': form.notes,
       Name: form.name,
       'Business name': form.business,
@@ -141,7 +220,7 @@ export default function QuoteModal() {
       const selected = form.groups[group.name] ?? [];
       const other = form.others[group.name]?.trim();
       const all = [...selected, ...(other ? [`Other: ${other}`] : [])];
-      payload[group.name] = all.length ? all.join(', ') : '—';
+      payload[group.name] = all.length ? all.join(', ') : 'Not specified';
     }
 
     try {
@@ -152,6 +231,7 @@ export default function QuoteModal() {
       });
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
       setStatus('success');
+      clearDraft();
     } catch (err: any) {
       setStatus('error');
       setErrorMsg(err?.message || 'Something went wrong. Please call us on 1300 123 456.');
@@ -159,44 +239,80 @@ export default function QuoteModal() {
   };
 
   return (
-    <AnimatePresence>
+    /* Conditional render, not AnimatePresence: see the note in Services.tsx.
+       The exit animation left an invisible click-blocking overlay behind. */
+    <>
       {isOpen && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
           className="fixed inset-0 z-[60] bg-slate-900/70 backdrop-blur-sm flex items-start sm:items-center justify-center p-0 sm:p-4 overflow-y-auto"
-          onClick={closeQuote}
+          onClick={requestClose}
         >
           <motion.div
+            ref={panelRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="quote-modal-title"
+            tabIndex={-1}
             initial={{ opacity: 0, y: 20, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="bg-white w-full sm:max-w-2xl sm:rounded-2xl shadow-2xl my-0 sm:my-8 min-h-screen sm:min-h-0 sm:max-h-[90vh] flex flex-col"
+            className="relative bg-white w-full sm:max-w-2xl sm:rounded-2xl shadow-2xl my-0 sm:my-8 min-h-screen sm:min-h-0 sm:max-h-[90vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Discard confirmation, shown instead of losing a part-filled form */}
+            {confirmDiscard && (
+              <div className="absolute inset-0 z-10 bg-white/95 backdrop-blur-sm flex items-center justify-center p-6 sm:rounded-2xl">
+                <div className="max-w-sm text-center">
+                  <h3 className="text-xl font-display font-semibold text-primary-900 mb-2">
+                    Discard this quote request?
+                  </h3>
+                  <p className="text-slate-600 mb-6">
+                    Your answers will be lost. They are saved while this tab stays open, so you can also keep editing and come back to it.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button
+                      type="button"
+                      onClick={() => setConfirmDiscard(false)}
+                      className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-full font-medium transition-colors"
+                    >
+                      Keep editing
+                    </button>
+                    <button
+                      type="button"
+                      onClick={discardAndClose}
+                      className="text-slate-600 hover:text-slate-900 px-6 py-3 rounded-full font-medium border border-slate-200 transition-colors"
+                    >
+                      Discard
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 flex-shrink-0">
-              <div className="flex items-center gap-3">
+            <div className="flex items-center justify-between gap-3 px-4 sm:px-6 py-4 border-b border-slate-100 flex-shrink-0">
+              <div className="flex items-center gap-2 min-w-0">
                 {service && status !== 'success' && (
                   <button
                     type="button"
                     onClick={() => setService(null)}
-                    className="text-slate-400 hover:text-primary-600 p-1 -m-1"
+                    className="text-slate-400 hover:text-primary-600 flex items-center justify-center w-11 h-11 -ml-2 flex-shrink-0 rounded-lg"
                     aria-label="Back"
                   >
                     <ArrowLeft className="w-5 h-5" />
                   </button>
                 )}
-                <h2 className="text-xl font-display font-semibold text-primary-900">
+                <h2 id="quote-modal-title" className="text-lg sm:text-xl font-display font-semibold text-primary-900">
                   Request a Quote
                 </h2>
               </div>
               <button
                 type="button"
-                onClick={closeQuote}
-                className="text-slate-400 hover:text-slate-700 p-1 -m-1"
+                onClick={requestClose}
+                className="text-slate-400 hover:text-slate-700 flex items-center justify-center w-11 h-11 -mr-2 flex-shrink-0 rounded-lg"
                 aria-label="Close"
               >
                 <X className="w-6 h-6" />
@@ -210,12 +326,12 @@ export default function QuoteModal() {
                   <div className="w-16 h-16 mx-auto rounded-full bg-leaf-100 text-leaf-600 flex items-center justify-center mb-4">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-display font-semibold text-primary-900 mb-2">Thanks — we got it.</h3>
+                  <h3 className="text-2xl font-display font-semibold text-primary-900 mb-2">Thanks, we got it.</h3>
                   <p className="text-slate-600 mb-6 max-w-md mx-auto">
                     We will review your request and strive to contact you with a quote today.
                   </p>
                   <button
-                    onClick={closeQuote}
+                    onClick={() => { clearDraft(); closeQuote(); }}
                     className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-full font-medium transition-colors"
                   >
                     Close
@@ -247,7 +363,7 @@ export default function QuoteModal() {
                     <strong>Service:</strong> {serviceLabels[service]}
                   </div>
 
-                  <label className="flex items-start gap-3 cursor-pointer">
+                  <label className="flex items-start gap-3 py-2 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={form.callBack}
@@ -275,7 +391,7 @@ export default function QuoteModal() {
                         {group.options.map((opt) => {
                           const checked = (form.groups[group.name] ?? []).includes(opt);
                           return (
-                            <label key={opt} className="flex items-start gap-2 cursor-pointer text-sm text-slate-700">
+                            <label key={opt} className="flex items-start gap-2 py-2.5 cursor-pointer text-sm text-slate-700">
                               <input
                                 type="checkbox"
                                 checked={checked}
@@ -303,7 +419,7 @@ export default function QuoteModal() {
                     <legend className="font-semibold text-primary-900">Would you like to upload photos?</legend>
                     <div className="flex gap-6">
                       {(['Yes', 'No'] as const).map((opt) => (
-                        <label key={opt} className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                        <label key={opt} className="flex items-center gap-2 py-2.5 text-sm text-slate-700 cursor-pointer">
                           <input
                             type="radio"
                             name="photos"
@@ -373,6 +489,6 @@ export default function QuoteModal() {
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </>
   );
 }

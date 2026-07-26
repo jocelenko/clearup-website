@@ -6,7 +6,7 @@ import { motion } from 'motion/react';
   leaf in the logo) on a white section. Text stays navy for contrast.
 */
 const boxClass =
-  'bg-gradient-to-br from-leaf-100 to-leaf-200 rounded-2xl p-8 shadow-sm border border-leaf-200';
+  'bg-gradient-to-br from-leaf-100 to-leaf-200 rounded-2xl p-6 sm:p-8 shadow-sm border border-leaf-200 scroll-mt-28';
 
 export default function ValuesCulture() {
   return (
@@ -27,6 +27,7 @@ export default function ValuesCulture() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            id="our-values"
             className={boxClass}
           >
             <h3 className="text-xl font-display font-semibold text-primary-900 mb-4">Our Values</h3>
@@ -42,6 +43,7 @@ export default function ValuesCulture() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.5 }}
+            id="our-culture"
             className={boxClass}
           >
             <h3 className="text-xl font-display font-semibold text-primary-900 mb-4">Our Culture</h3>
@@ -55,6 +57,7 @@ export default function ValuesCulture() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.5 }}
+            id="vision"
             className={boxClass}
           >
             <h3 className="text-xl font-display font-semibold text-primary-900 mb-4">Vision</h3>

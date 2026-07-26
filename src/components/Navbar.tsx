@@ -21,13 +21,13 @@ export default function Navbar() {
   return (
     <nav className="fixed w-full bg-white/95 backdrop-blur-md z-40 border-b border-slate-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 gap-4">
+        <div className="flex justify-between items-center h-24 gap-4">
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
               <img
-                src="/logo.png"
+                src={`${import.meta.env.BASE_URL}logo.png`}
                 alt="Clear Up Logo"
-                className="h-10 sm:h-12 w-auto max-w-[200px] sm:max-w-[240px] mix-blend-multiply object-contain"
+                className="h-14 sm:h-16 w-auto max-w-[240px] sm:max-w-[300px] mix-blend-multiply object-contain"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   document.getElementById('fallback-logo')?.classList.remove('hidden');

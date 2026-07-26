@@ -17,15 +17,23 @@
   --color-primary-800: #1e40af;
   --color-primary-900: #1e3a8a;
 
-  /* Brand light greens (leaf) */
-  --color-leaf-50: #f0fdf4;
-  --color-leaf-100: #dcfce7;
-  --color-leaf-200: #bbf7d0;
-  --color-leaf-300: #86efac;
-  --color-leaf-400: #4ade80;
-  --color-leaf-500: #7cb342;
-  --color-leaf-600: #5d9230;
-  --color-leaf-700: #4a7427;
+  /*
+    Brand greens (leaf).
+    leaf-500 (#84bb4c) is sampled straight from the "Up" in the Clear Up
+    wordmark and the light green tip of the leaf. The darker steps are the
+    same hue pushed down so white text stays legible on green backgrounds.
+  */
+  --color-leaf-50: #f5faed;
+  --color-leaf-100: #e8f4d6;
+  --color-leaf-200: #d3e9b3;
+  --color-leaf-300: #b6da88;
+  --color-leaf-400: #9bc963;
+  --color-leaf-500: #84bb4c;
+  --color-leaf-600: #6b9a3a;
+  --color-leaf-700: #53772e;
+  --color-leaf-800: #405c26;
+  --color-leaf-900: #2c401b;
+  --color-leaf-950: #1a2810;
 
   /* Sky tones for soft alternating sections */
   --color-sky-50: #f0f9ff;

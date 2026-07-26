@@ -14,16 +14,20 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 mt-auto">
+    <footer className="bg-slate-900 text-slate-300 pt-12 pb-8 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-          {/* Logo + intro */}
+        {/*
+          Six-column grid: the logo takes two, then the four menus take one
+          each, so the gap between every menu column is identical.
+        */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+          {/* Logo */}
           <div className="lg:col-span-2">
-            <Link to="/" className="inline-flex items-center gap-2 mb-4">
+            <Link to="/" className="inline-flex items-center gap-2">
               <img
-                src="/logo overlay.png"
+                src={`${import.meta.env.BASE_URL}logo%20overlay.png`}
                 alt="Clear Up Logo"
-                className="h-12 w-auto object-contain"
+                className="h-20 w-auto object-contain"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   document.getElementById('footer-fallback-logo')?.classList.remove('hidden');
@@ -38,18 +42,15 @@ export default function Footer() {
                 </span>
               </div>
             </Link>
-            <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
-              Delivering reliable commercial cleaning services with integrity, care and respect across Brisbane, the Gold Coast and the Sunshine Coast.
-            </p>
           </div>
 
           {/* Company */}
           <div>
             <h4 className="text-white font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-sm">
-              <li><button onClick={() => scrollTo('values')} className="hover:text-leaf-400 transition-colors">Our Values</button></li>
-              <li><button onClick={() => scrollTo('values')} className="hover:text-leaf-400 transition-colors">Our Culture</button></li>
-              <li><button onClick={() => scrollTo('values')} className="hover:text-leaf-400 transition-colors">Vision</button></li>
+              <li><button onClick={() => scrollTo('values')} className="text-left hover:text-leaf-400 transition-colors">Our Values</button></li>
+              <li><button onClick={() => scrollTo('values')} className="text-left hover:text-leaf-400 transition-colors">Our Culture</button></li>
+              <li><button onClick={() => scrollTo('values')} className="text-left hover:text-leaf-400 transition-colors">Vision</button></li>
             </ul>
           </div>
 
@@ -57,20 +58,24 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">Our Services</h4>
             <ul className="space-y-2 text-sm">
-              <li><button onClick={() => scrollTo('services')} className="hover:text-leaf-400 transition-colors">Window Cleaning</button></li>
-              <li><button onClick={() => scrollTo('services')} className="hover:text-leaf-400 transition-colors">Retail &amp; Commercial Cleaning</button></li>
-              <li><button onClick={() => scrollTo('services')} className="hover:text-leaf-400 transition-colors">Periodical Cleaning</button></li>
+              <li><button onClick={() => scrollTo('services')} className="text-left hover:text-leaf-400 transition-colors">Window Cleaning</button></li>
+              <li><button onClick={() => scrollTo('services')} className="text-left hover:text-leaf-400 transition-colors">Retail &amp; Commercial Cleaning</button></li>
+              <li><button onClick={() => scrollTo('services')} className="text-left hover:text-leaf-400 transition-colors">Periodical Cleaning</button></li>
             </ul>
           </div>
 
-          {/* Locations + Contact */}
+          {/* Locations */}
           <div>
             <h4 className="text-white font-semibold mb-4">Service Locations</h4>
-            <ul className="space-y-2 text-sm mb-6">
+            <ul className="space-y-2 text-sm">
               <li>Brisbane</li>
               <li>Gold Coast</li>
               <li>Sunshine Coast</li>
             </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
             <h4 className="text-white font-semibold mb-4">Stay in Touch</h4>
             <ul className="space-y-2 text-sm">
               <li>
@@ -80,7 +85,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <button onClick={() => openQuote()} className="hover:text-leaf-400 transition-colors">
+                <button onClick={() => openQuote()} className="text-left hover:text-leaf-400 transition-colors">
                   Request a Quote
                 </button>
               </li>
@@ -88,7 +93,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-slate-800 pt-8">
+        <div className="border-t border-slate-800 pt-6">
           <p className="text-sm text-slate-400 italic max-w-3xl mb-6">
             Clear Up acknowledges the Traditional Custodians of the land and pays respect to Elders past and present, their culture and history.
           </p>

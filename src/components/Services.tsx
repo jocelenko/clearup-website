@@ -1,8 +1,35 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Building2, Wrench, X, ArrowRight } from 'lucide-react';
+import { Building2, Truck, X, ArrowRight } from 'lucide-react';
 import { useQuoteModal } from '../context/QuoteModalContext';
 import type { QuoteService } from '../context/QuoteModalContext';
+
+/*
+  Squeegee — drawn to match the lucide stroke style (24px grid, 2px stroke)
+  because lucide has no squeegee of its own. Handle, grip, blade holder and
+  rubber edge.
+*/
+function Squeegee({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 2.5v6" />
+      <path d="M9.25 2.5h5.5" />
+      <rect x="2" y="8.5" width="20" height="4.5" rx="1.5" />
+      <path d="M5 13v3" />
+      <path d="M19 13v3" />
+      <path d="M4 16h16" />
+    </svg>
+  );
+}
 
 type ServiceKey = 'window' | 'retail' | 'periodical';
 
@@ -19,7 +46,7 @@ const services: ServiceDef[] = [
     key: 'window',
     title: 'Window Cleaning',
     short: 'High-quality, reliable window cleaning with clear communication at every stage.',
-    icon: <Sparkles className="w-7 h-7" />,
+    icon: <Squeegee className="w-7 h-7" />,
     details: (
       <p>
         Committed to delivering high-quality service and an exceptional customer experience. We go beyond completing the task by refining our processes, tailoring each service, and maintaining clear communication throughout every stage of the job. With daily reporting and proactive management, we keep you informed of progress and any changes — ensuring reliable results, regardless of conditions.
@@ -40,8 +67,8 @@ const services: ServiceDef[] = [
   {
     key: 'periodical',
     title: 'Periodical Cleaning',
-    short: 'Specialised periodical work — from carpet care to high-pressure hard surface cleaning.',
-    icon: <Wrench className="w-7 h-7" />,
+    short: 'Specialised periodical work, from carpet care to high-pressure hard surface cleaning.',
+    icon: <Truck className="w-7 h-7" />,
     details: (
       <ul className="space-y-3 list-disc pl-5">
         <li>
@@ -68,14 +95,14 @@ export default function Services() {
   const activeService = services.find((s) => s.key === active);
 
   return (
-    <section id="services" className="py-20 lg:py-28 bg-sky-50/60">
+    <section id="services" className="py-14 lg:py-16 bg-gradient-to-br from-leaf-900 via-leaf-800 to-leaf-950 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold text-primary-900 mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold text-white mb-4">
             Where We Can Serve You
           </h2>
-          <p className="text-slate-600 text-lg">
-            Three specialised service lines, each delivered with the same standard of care and transparency.
+          <p className="text-leaf-200 text-lg">
+            Delivered with the same standard of care and transparency.
           </p>
         </div>
 

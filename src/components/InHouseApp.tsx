@@ -10,7 +10,7 @@ const features = [
 
 export default function InHouseApp() {
   return (
-    <section id="app" className="py-20 lg:py-28 bg-gradient-to-br from-primary-900 via-primary-800 to-slate-900 text-white overflow-hidden">
+    <section id="app" className="py-14 lg:py-16 bg-gradient-to-br from-primary-900 via-primary-800 to-slate-900 text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
@@ -26,7 +26,7 @@ export default function InHouseApp() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold mb-6 leading-tight">
               Built to Serve Better — Our In-House App
             </h2>
-            <p className="text-white/80 text-lg leading-relaxed mb-8">
+            <p className="text-primary-200 text-lg leading-relaxed mb-8">
               We created a robust in-house app to streamline operations, track service delivery and support clear communication. With reporting accessible at any time, we can serve our clients with greater reliability, transparency and care.
             </p>
             <div className="space-y-4">

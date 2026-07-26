@@ -1,4 +1,4 @@
-# Clear Up website — progress report
+# Clear Up website: progress report
 
 **Prepared for:** Sonia
 **Date:** 26 July 2026

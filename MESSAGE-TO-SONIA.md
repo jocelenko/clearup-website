@@ -46,6 +46,10 @@ O site está hoje em um endereço temporário, no meu ambiente de teste. Quando 
 
 Eles continuam indo para admin@clear-up.com.au, ou você prefere que cheguem direto para você?
 
+**7. O nome, junto ou separado**
+
+Uma coisa pequena que notei. Na aba do navegador o nome aparece como "ClearUp", tudo junto, mas em todo o resto do site e na sua assinatura está "Clear Up", separado. Qual dos dois é o correto? Deixei como está por enquanto e ajusto assim que você me disser.
+
 Se for mais fácil conversar por telefone sobre qualquer um desses pontos, é só me falar. A primeira é a que vale conferir antes das outras.
 
 Igor

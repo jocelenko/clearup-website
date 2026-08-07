@@ -93,9 +93,9 @@ export default function Footer() {
             </div>
             <ul className="text-sm">
               <li>
-                <a href={`tel:${CONTACT.phoneTel}`} className={`${linkClass} gap-2`}>
+                <a href={`tel:${CONTACT.mobileTel}`} className={`${linkClass} gap-2`}>
                   <Phone className="w-4 h-4 flex-shrink-0" />
-                  {CONTACT.phoneDisplay}
+                  {CONTACT.mobileDisplay}
                 </a>
               </li>
               <li>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Droplets, Phone, Mail } from 'lucide-react';
+import { Droplets, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useQuoteModal } from '../context/QuoteModalContext';
 import { CONTACT } from '../config/contact';
@@ -96,12 +96,6 @@ export default function Footer() {
                 <a href={`tel:${CONTACT.phoneTel}`} className={`${linkClass} gap-2`}>
                   <Phone className="w-4 h-4 flex-shrink-0" />
                   {CONTACT.phoneDisplay}
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${CONTACT.email}`} className={`${linkClass} gap-2 break-all`}>
-                  <Mail className="w-4 h-4 flex-shrink-0" />
-                  {CONTACT.email}
                 </a>
               </li>
               <li>

@@ -6,7 +6,9 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: '/',
+    // '/' for the real domain. The Pages workflow overrides it with
+    // DEPLOY_BASE=/clearup-website/ so the preview URL keeps working.
+    base: env.DEPLOY_BASE || '/',
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),

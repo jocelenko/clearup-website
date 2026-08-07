@@ -5,6 +5,12 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Never rewrite .well-known. Let's Encrypt writes its challenge file there
+  # to renew the SSL certificate, and swallowing that request would make the
+  # renewal fail quietly about 90 days from now.
+  RewriteRule ^\.well-known/ - [L]
+
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d

@@ -81,11 +81,11 @@ export default function Hero() {
               <ArrowRight className="w-5 h-5" />
             </button>
             <a
-              href={`tel:${CONTACT.mobileTel}`}
+              href={`tel:${CONTACT.phoneTel}`}
               className="inline-flex justify-center items-center gap-2 bg-white/12 hover:bg-white/22 text-white border border-white/30 px-8 py-4 rounded-full font-medium transition-colors backdrop-blur-md"
             >
               <Phone className="w-4 h-4" />
-              {CONTACT.mobileDisplay}
+              {CONTACT.phoneDisplay}
             </a>
           </div>
         </motion.div>

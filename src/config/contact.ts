@@ -18,8 +18,8 @@ export const CONTACT = {
 
   /**
    * Sonia's direct mobile. Kept separate from the business line and used
-   * where the contact is her personally, such as the footer block under her
-   * name and the hero call button.
+   * where the contact is her personally, which is now just the footer block
+   * under her name.
    */
   mobileDisplay: '0407 000 059',
   mobileTel: '0407000059',

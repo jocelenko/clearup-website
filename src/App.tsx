@@ -12,7 +12,7 @@ export default function App() {
   return (
     /* reducedMotion="user" makes motion honour the OS setting; CSS alone
        cannot stop JS-driven animations. */
-    <BrowserRouter basename="/clearup-website/">
+    <BrowserRouter basename="/">
       <MotionConfig reducedMotion="user">
         <QuoteModalProvider>
           <div className="min-h-screen bg-white text-slate-800 flex flex-col">
